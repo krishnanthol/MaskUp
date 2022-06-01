@@ -38,6 +38,7 @@ public class GetCounty extends AsyncTask<Void, Void, Void>
             JSONObject geocoderAll = new JSONObject(geocoderString);
             JSONArray geocoderResults = new JSONArray(geocoderAll.getString("results"));
             MainActivity.county = geocoderResults.getJSONObject(0).getString("county");
+            MainActivity.state = geocoderResults.getJSONObject(0).getString("state");
         }
 
         catch(IOException e)
