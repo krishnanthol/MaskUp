@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity
         GetCounty getCounty = new GetCounty();
         getCounty.execute();
 
+        //https://knowi.com/api/data/ipE4xJhLBkn8H8jisFisAdHKvepFR5I4bGzRySZ2aaXlJgie?entityName=Latest%20Day%20County%20Level%20Data&exportFormat=csv&c9SqlFilter=select%20*%20where%20State%20like%20New%20Jersey
+
         if(county != null && state!= null)
         {
             for(int i = 0; i < county.length(); i++)
