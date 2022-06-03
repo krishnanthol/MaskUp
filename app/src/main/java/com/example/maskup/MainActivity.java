@@ -10,6 +10,8 @@ public class MainActivity extends AppCompatActivity
     static String county;
     static String state;
     static String covidCases;
+    static String longitude;
+    static String latitude;
 
     static double averageTemp;
 
@@ -30,5 +32,7 @@ public class MainActivity extends AppCompatActivity
         getLocation.execute();
 
         getStats = new GetStats();
+
+        //https://apidocs.geoapify.com/playground/place-details
     }
 }
