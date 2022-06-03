@@ -1,6 +1,8 @@
 package com.example.maskup;
 
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -39,6 +41,32 @@ public class GetCounty extends AsyncTask<Void, Void, Void>
             JSONArray geocoderResults = new JSONArray(geocoderAll.getString("results"));
             MainActivity.county = geocoderResults.getJSONObject(0).getString("county");
             MainActivity.state = geocoderResults.getJSONObject(0).getString("state");
+
+            Log.d("county",MainActivity.county);
+
+            new Handler(Looper.getMainLooper()).post(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    if(MainActivity.county != null && MainActivity.state!= null)
+                    {
+                        for(int i = 0; i < MainActivity.county.length(); i++)
+                        {
+                            if(MainActivity.county.charAt(i) == ' ')
+                            {
+                                MainActivity.county = MainActivity.county.substring(0,i) + "%20" + MainActivity.county.substring(i+1,MainActivity.county.length());
+                                i = 0;
+                            }
+                        }
+
+                        Log.d("county",MainActivity.county);
+
+                        MainActivity.getStats.execute();
+                        MainActivity.getCounty.cancel(true);
+                    }
+                }
+            });
         }
 
         catch(IOException e)
