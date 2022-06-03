@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class GetCounty extends AsyncTask<Void, Void, Void>
+public class GetLocation extends AsyncTask<Void, Void, Void>
 {
     private String geocoderString = "";
 
@@ -63,7 +63,7 @@ public class GetCounty extends AsyncTask<Void, Void, Void>
                         Log.d("county",MainActivity.county);
 
                         MainActivity.getStats.execute();
-                        MainActivity.getCounty.cancel(true);
+                        MainActivity.getLocation.cancel(true);
                     }
                 }
             });

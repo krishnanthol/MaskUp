@@ -12,8 +12,9 @@ public class MainActivity extends AppCompatActivity
     static String state;
     static String covidCases;
 
-    static GetCounty getCounty;
+    static GetLocation getLocation;
     static GetStats getStats;
+    static GetWeather getWeather;
 
 
     @Override
@@ -22,8 +23,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getCounty = new GetCounty();
-        getCounty.execute();
+        getWeather = new GetWeather();
+        getWeather.execute();
+
+        getLocation = new GetLocation();
+        getLocation.execute();
 
         getStats = new GetStats();
     }
