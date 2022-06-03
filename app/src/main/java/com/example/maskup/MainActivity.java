@@ -3,7 +3,6 @@ package com.example.maskup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -12,10 +11,11 @@ public class MainActivity extends AppCompatActivity
     static String state;
     static String covidCases;
 
+    static double averageTemp;
+
     static GetLocation getLocation;
     static GetStats getStats;
     static GetWeather getWeather;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

@@ -1,7 +1,9 @@
 package com.example.maskup;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +21,8 @@ public class GetWeather extends AsyncTask<Void, Void, Void>
 
     private String latitude;
     private String longitude;
+
+    private double temps;
 
     @Override
     protected Void doInBackground(Void...voids)
@@ -41,6 +45,7 @@ public class GetWeather extends AsyncTask<Void, Void, Void>
             latitude = coordinates.getString("lat");
             longitude = coordinates.getString("lon");
 
+
             URL url1 = new URL("https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=eb140fb4e55477652cd7b6f69d0d1c9f");
             URLConnection urlConnection1 = url1.openConnection();
             InputStream inputStream1 = urlConnection1.getInputStream();
@@ -52,9 +57,17 @@ public class GetWeather extends AsyncTask<Void, Void, Void>
                 weatherString += line1;
                 line1 = br.readLine();
             }
+
             JSONObject weatherAll = new JSONObject(weatherString);
+            JSONArray hourlyForecast = new JSONArray(weatherAll.getString("hourly"));
 
+            for (int i = 0; i < 10; i++)
+            {
+                temps+=Double.parseDouble(hourlyForecast.getJSONObject(i).getString("temp"));
+            }
 
+            MainActivity.averageTemp = temps/10;
+            Log.d("averageTemp",""+MainActivity.averageTemp);
 
         }
 

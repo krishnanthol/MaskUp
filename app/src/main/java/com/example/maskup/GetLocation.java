@@ -61,6 +61,7 @@ public class GetLocation extends AsyncTask<Void, Void, Void>
                         }
 
                         Log.d("county",MainActivity.county);
+                        Log.d("state",MainActivity.state);
 
                         MainActivity.getStats.execute();
                         MainActivity.getLocation.cancel(true);
