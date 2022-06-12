@@ -5,7 +5,16 @@
       <map>
         <entry key="..\:/Users/10022604/Desktop/AndroidStudioProjects/MaskUp/app/src/main/res/layout/activity_main.xml" value="0.29375" />
         <entry key="..\:/Users/10022604/Desktop/AndroidStudioProjects/MaskUp/app/src/main/res/layout/adapter_custom.xml" value="0.29375" />
-        <entry key="app/src/main/res/layout/welcome.xml" value="0.335" />
+        <entry key="app/src/main/res/drawable/background_gradient_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/button_gradient_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/gradient_drawable.xml" value="0.1815" />
+        <entry key="app/src/main/res/drawable/toolbar_bg.xml" value="0.1415" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.39814814814814814" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.29259259259259257" />
+        <entry key="app/src/main/res/layout/home.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/nav_header.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/welcome.xml" value="0.5" />
+        <entry key="app/src/main/res/menu/drawer_menu.xml" value="0.5625" />
       </map>
     </option>
   </component>

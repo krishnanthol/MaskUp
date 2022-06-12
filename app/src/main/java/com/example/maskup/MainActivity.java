@@ -2,14 +2,21 @@ package com.example.maskup;
 
 import static java.util.Locale.US;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.ListView;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,19 +44,29 @@ public class MainActivity extends AppCompatActivity
     static Context context;
     static CustomAdapter customAdapter;
 
+    private DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = findViewById(R.id.id_listView);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        //listView = findViewById(R.id.id_listView);
 
         context = this;
 
         geocoder = new Geocoder(this, US);
         GetFrequentPlaces getFrequentPlaces = new GetFrequentPlaces();
-        getFrequentPlaces.execute();
+        //getFrequentPlaces.execute();
 
         //getWeather = new GetWeather();
         //getWeather.execute();
@@ -58,6 +75,24 @@ public class MainActivity extends AppCompatActivity
         //getLocation.execute();
 
         //getStats = new GetStats();
+
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if(drawer.isDrawerOpen(GravityCompat.START))
+        {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else
+        {
+            super.onBackPressed();
+        }
+    }
+
+    private void setSupportActionBar(CollapsingToolbarLayout toolbar)
+    {
 
     }
 }
