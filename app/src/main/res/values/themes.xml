@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.MaskUp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -20,7 +20,14 @@
         <item name = "android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.MaskUp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name = "ToolbarTheme" >
+        <item name="android:fontFamily">@font/brittany</item>
+    </style>
+
+    <style name="DidactGothicTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/didactgothic</item>
+    </style>
 
     <style name="Theme.MaskUp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

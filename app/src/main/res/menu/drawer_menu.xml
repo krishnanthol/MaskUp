@@ -4,19 +4,23 @@
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
 
+        <item android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home"/>
+
         <item android:id="@+id/nav_profile"
             android:icon="@drawable/ic_profile"
             android:title="Profile"/>
 
-        <item android:id="@+id/stats"
+        <item android:id="@+id/nav_stats"
             android:icon="@drawable/ic_stats"
             android:title="COVID Stats"/>
 
-        <item android:id="@+id/weather"
+        <item android:id="@+id/nav_weather"
             android:icon="@drawable/ic_weather"
             android:title="Weather"/>
 
-        <item android:id="@+id/places"
+        <item android:id="@+id/nav_places"
             android:icon="@drawable/ic_places"
             android:title="Places"/>
 
