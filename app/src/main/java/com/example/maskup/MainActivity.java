@@ -75,14 +75,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //GetFrequentPlaces getFrequentPlaces = new GetFrequentPlaces();
         //getFrequentPlaces.execute();
 
-        //getWeather = new GetWeather();
-        //getWeather.execute();
+        getWeather = new GetWeather();
+        getWeather.execute();
 
-        //getLocation = new GetLocation();
-        //getLocation.execute();
+        getLocation = new GetLocation();
+        getLocation.execute();
 
-        //getStats = new GetStats();
-
+        getStats = new GetStats();
     }
 
     @Override

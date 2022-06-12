@@ -29,5 +29,9 @@
         <item name="android:fontFamily">@font/didactgothic</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_gradient_drawable</item>
+    </style>
+
     <style name="Theme.MaskUp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
