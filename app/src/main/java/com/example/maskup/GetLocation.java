@@ -51,17 +51,6 @@ public class GetLocation extends AsyncTask<Void, Void, Void>
                 {
                     if(MainActivity.county != null && MainActivity.state!= null)
                     {
-                        for(int i = 0; i < MainActivity.county.length(); i++)
-                        {
-                            if(MainActivity.county.charAt(i) == ' ')
-                            {
-                                MainActivity.county = MainActivity.county.substring(0,i) + "%20" + MainActivity.county.substring(i+1,MainActivity.county.length());
-                                i = 0;
-                            }
-                        }
-
-                        Log.d("county",MainActivity.county);
-                        Log.d("state",MainActivity.state);
 
                         MainActivity.getStats.execute();
                         MainActivity.getLocation.cancel(true);

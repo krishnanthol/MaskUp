@@ -18,14 +18,13 @@ import android.widget.ListView;
 
 
 import com.google.android.material.navigation.NavigationView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-    static String zipCode = "08873";
+    static String zipCode = "08852";
     static String county;
     static String state;
     static String covidCases;
@@ -82,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getLocation.execute();
 
         getStats = new GetStats();
+
     }
 
     @Override
