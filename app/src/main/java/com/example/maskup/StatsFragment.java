@@ -1,5 +1,6 @@
 package com.example.maskup;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -93,6 +94,7 @@ public class StatsFragment extends Fragment
             usNewDeathsGraph.addSeries(usNewDeathsGraphData);
 
             progressBar.setProgress((int) (((double) countyRiskLevel /10)*100));
+            progressBar.getProgressDrawable().setColorFilter(R.drawable.button_gradient_drawable, android.graphics.PorterDuff.Mode.SRC_IN);
 
         }
 
