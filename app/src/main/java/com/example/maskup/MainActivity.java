@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static List<Integer> stateNewCases = new ArrayList<>();
     static List<Integer> stateNewDeaths = new ArrayList<>();
     static List<Integer> usNewCases = new ArrayList<>();
+    static List<Integer> usNewDeaths = new ArrayList<>();
 
     static List<Address> addresses = new ArrayList<>();
     static Geocoder geocoder;

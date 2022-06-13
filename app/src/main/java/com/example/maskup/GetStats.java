@@ -114,7 +114,20 @@ public class GetStats extends AsyncTask<Void, Void, Void>
                 }
             }
 
+            for(int i = statsAll1.getJSONArray("actualsTimeseries").length()-1; i > statsAll1.getJSONArray("actualsTimeseries").length()-6; i--)
+            {
+                if(statsAll1.getJSONArray("actualsTimeseries").getJSONObject(i).getString("newDeaths").equals("null"))
+                {
+                    MainActivity.usNewDeaths.add(0);
+                }
+                else
+                {
+                    MainActivity.usNewDeaths.add(Integer.parseInt(statsAll1.getJSONArray("actualsTimeseries").getJSONObject(i).getString("newDeaths")));
+                }
+            }
+
             Log.d("stats",MainActivity.usNewCases.toString());
+            Log.d("stats",MainActivity.usNewDeaths.toString());
 
         }
 
