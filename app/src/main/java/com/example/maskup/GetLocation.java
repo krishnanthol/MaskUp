@@ -40,6 +40,7 @@ public class GetLocation extends AsyncTask<Void, Void, Void>
             JSONObject geocoderAll = new JSONObject(geocoderString);
             JSONArray geocoderResults = new JSONArray(geocoderAll.getString("results"));
             MainActivity.county = geocoderResults.getJSONObject(0).getString("county");
+            MainActivity.town = geocoderResults.getJSONObject(0).getString("name");
             MainActivity.state = geocoderResults.getJSONObject(0).getString("state");
 
             Log.d("county",MainActivity.county);

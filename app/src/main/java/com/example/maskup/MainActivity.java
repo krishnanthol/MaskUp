@@ -25,6 +25,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     static String zipCode = "08852";
+    static String town;
     static String county;
     static String state;
 
