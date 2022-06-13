@@ -58,6 +58,7 @@ public class StatsFragment extends Fragment
             countyNewCasesGraph.setTitle("New County Cases");
             countyNewCasesGraph.getGridLabelRenderer().setVerticalAxisTitle("Cases");
             countyNewCasesGraph.getGridLabelRenderer().setHorizontalAxisTitle("Past 5 Days");
+            countyNewCasesGraph.getGridLabelRenderer().setPadding(100);
             countyNewCasesGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
             countyNewCasesGraph.addSeries(countyNewCasesGraphData);
 
@@ -71,6 +72,7 @@ public class StatsFragment extends Fragment
             countyNewDeathsGraph.setTitle("New County Death Cases");
             countyNewDeathsGraph.getGridLabelRenderer().setVerticalAxisTitle("Deaths");
             countyNewDeathsGraph.getGridLabelRenderer().setHorizontalAxisTitle("Past 5 Days");
+            countyNewDeathsGraph.getGridLabelRenderer().setPadding(100);
             countyNewDeathsGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
             countyNewDeathsGraph.addSeries(countyNewDeathsGraphData);
 
@@ -85,6 +87,7 @@ public class StatsFragment extends Fragment
             usNewCasesGraph.setTitle("New US Cases");
             usNewCasesGraph.getGridLabelRenderer().setVerticalAxisTitle("Cases");
             usNewCasesGraph.getGridLabelRenderer().setHorizontalAxisTitle("Past 5 Days");
+            usNewCasesGraph.getGridLabelRenderer().setPadding(100);
             usNewCasesGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
             usNewCasesGraph.addSeries(usNewCasesGraphData);
 
@@ -98,6 +101,7 @@ public class StatsFragment extends Fragment
             usNewDeathsGraph.setTitle("New US Deaths");
             usNewDeathsGraph.getGridLabelRenderer().setVerticalAxisTitle("Deaths");
             usNewDeathsGraph.getGridLabelRenderer().setHorizontalAxisTitle("Past 5 Days");
+            usNewDeathsGraph.getGridLabelRenderer().setPadding(100);
             usNewDeathsGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
             usNewDeathsGraph.addSeries(usNewDeathsGraphData);
 
