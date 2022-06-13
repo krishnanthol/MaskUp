@@ -1,5 +1,6 @@
 package com.example.maskup;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -128,8 +129,6 @@ public class GetStats extends AsyncTask<Void, Void, Void>
 
             Log.d("stats",MainActivity.usNewCases.toString());
             Log.d("stats",MainActivity.usNewDeaths.toString());
-
-            MainActivity.statsComplete = true;
         }
 
         catch(IOException e)

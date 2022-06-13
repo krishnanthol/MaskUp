@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     static NavigationView navigationView;
 
+    static Intent launchStats;
+
     private DrawerLayout drawer;
 
     @Override
@@ -88,7 +91,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getLocation = new GetLocation();
         getLocation.execute();
 
-        getStats = new GetStats();
+        //getStats = new GetStats();
+
+        launchStats = new Intent(MainActivity.this,StatsActivity.class);
 
     }
 
@@ -106,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_stats:
                 if(statsComplete)
                 {
+                    /*
                     Bundle bundle = new Bundle();
                     bundle.putInt("countyRiskLevel", countyRiskLevel);
                     bundle.putIntegerArrayList("countyNewCases", countyNewCases);
@@ -115,6 +121,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     StatsFragment statsFragment = new StatsFragment();
                     statsFragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,statsFragment).commit();
+
+                     */
+
+                    startActivity(launchStats);
                 }
                 else
                 {
