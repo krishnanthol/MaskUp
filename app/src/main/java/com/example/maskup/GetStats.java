@@ -82,6 +82,8 @@ public class GetStats extends AsyncTask<Void, Void, Void>
                 }
             }
 
+            MainActivity.stateRiskLevel = Integer.parseInt(statsAll.getJSONObject(statsObject).getJSONObject("riskLevels").getString("overall"));
+            Log.d("riskLevel",""+MainActivity.stateRiskLevel);
             Log.d("stats",MainActivity.stateNewCases.toString());
             Log.d("stats",MainActivity.stateNewDeaths.toString());
 

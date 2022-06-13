@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static GetWeather getWeather;
 
     static GetStats getStats;
+    static int stateRiskLevel;
     static List<Integer> stateNewCases = new ArrayList<>();
     static List<Integer> stateNewDeaths = new ArrayList<>();
     static List<Integer> usNewCases = new ArrayList<>();
