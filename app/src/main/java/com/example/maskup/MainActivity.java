@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     static NavigationView navigationView;
 
-    static Intent launchStats;
-
     private DrawerLayout drawer;
 
     @Override
@@ -91,10 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getLocation = new GetLocation();
         getLocation.execute();
 
-        //getStats = new GetStats();
-
-        launchStats = new Intent(MainActivity.this,StatsActivity.class);
-
+        getStats = new GetStats();
     }
 
     @Override
@@ -111,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_stats:
                 if(statsComplete)
                 {
-                    /*
                     Bundle bundle = new Bundle();
                     bundle.putInt("countyRiskLevel", countyRiskLevel);
                     bundle.putIntegerArrayList("countyNewCases", countyNewCases);
@@ -121,10 +115,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     StatsFragment statsFragment = new StatsFragment();
                     statsFragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,statsFragment).commit();
-
-                     */
-
-                    startActivity(launchStats);
                 }
                 else
                 {

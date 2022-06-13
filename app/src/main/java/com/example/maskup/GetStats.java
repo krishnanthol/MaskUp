@@ -127,6 +127,8 @@ public class GetStats extends AsyncTask<Void, Void, Void>
                 }
             }
 
+            MainActivity.statsComplete = true;
+
             Log.d("stats",MainActivity.usNewCases.toString());
             Log.d("stats",MainActivity.usNewDeaths.toString());
         }
