@@ -23,7 +23,7 @@
                 style="@style/DidactGothicTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="224dp"
+                android:layout_marginTop="32dp"
                 android:text="Risk Level"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.501"
@@ -35,11 +35,20 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="264dp"
                 android:layout_height="17dp"
-                android:layout_marginTop="16dp"
-                android:scaleY="4"
+                android:layout_marginTop="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/id_stateNewCasesGraph"
+                android:layout_width="302dp"
+                android:layout_height="233dp"
+                android:layout_marginTop="108dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_riskLevelBar" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

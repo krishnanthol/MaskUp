@@ -1,7 +1,5 @@
 package com.example.maskup;
 
-import static java.util.Locale.US;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,11 +32,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static GetWeather getWeather;
 
     static GetStats getStats;
+    static boolean statsComplete = false;
     static int stateRiskLevel;
-    static List<Integer> stateNewCases = new ArrayList<>();
-    static List<Integer> stateNewDeaths = new ArrayList<>();
-    static List<Integer> usNewCases = new ArrayList<>();
-    static List<Integer> usNewDeaths = new ArrayList<>();
+    static ArrayList<Integer> stateNewCases = new ArrayList<>();
+    static ArrayList<Integer> stateNewDeaths = new ArrayList<>();
+    static ArrayList<Integer> usNewCases = new ArrayList<>();
+    static ArrayList<Integer> usNewDeaths = new ArrayList<>();
 
     static List<Address> addresses = new ArrayList<>();
     static Geocoder geocoder;
@@ -48,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static Context context;
     static CustomAdapter customAdapter;
 
+    static NavigationView navigationView;
+
     private DrawerLayout drawer;
 
     @Override
@@ -56,12 +57,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        navigationView = findViewById(R.id.id_nav_view);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Mask Up");
 
         drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.id_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -101,7 +104,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
                 break;
             case R.id.nav_stats:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StatsFragment()).commit();
+                if(statsComplete)
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("stateRiskLevel", stateRiskLevel);
+                    bundle.putIntegerArrayList("stateNewCases", stateNewCases);
+                    bundle.putIntegerArrayList("stateNewDeaths", stateNewDeaths);
+                    bundle.putIntegerArrayList("stateNewCases", usNewCases);
+                    bundle.putIntegerArrayList("stateNewDeaths", usNewDeaths);
+                    StatsFragment statsFragment = new StatsFragment();
+                    statsFragment.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,statsFragment).commit();
+                }
+                else
+                {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StatsFragment()).commit();
+                }
                 break;
             case R.id.nav_weather:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new WeatherFragment()).commit();

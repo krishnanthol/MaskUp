@@ -1,7 +1,17 @@
 package com.example.maskup;
 
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 public class GetStats extends AsyncTask<Void, Void, Void>
 {
@@ -128,6 +139,32 @@ public class GetStats extends AsyncTask<Void, Void, Void>
 
             Log.d("stats",MainActivity.usNewCases.toString());
             Log.d("stats",MainActivity.usNewDeaths.toString());
+
+            MainActivity.statsComplete = true;
+
+            /*
+            MainActivity.navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
+            {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item)
+                {
+                    if(item.getItemId() == R.id.nav_stats)
+                    {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("stateRiskLevel", 12);
+                        bundle.putIntegerArrayList("stateNewCases", MainActivity.stateNewCases);
+                        bundle.putIntegerArrayList("stateNewDeaths", MainActivity.stateNewDeaths);
+                        bundle.putIntegerArrayList("stateNewCases", MainActivity.usNewCases);
+                        bundle.putIntegerArrayList("stateNewDeaths", MainActivity.usNewDeaths);
+                        StatsFragment statsFragment = new StatsFragment();
+                        statsFragment.setArguments(bundle);
+                        ((FragmentActivity) MainActivity.context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
+                    }
+                    return false;
+                }
+            });
+
+             */
 
         }
 
