@@ -1,19 +1,23 @@
 package com.example.maskup;
 
+import java.util.ArrayList;
+
 public class Place
 {
     String name;
+    ArrayList<Boolean> days;
     int icon;
     int hours;
     boolean crowded;
-    boolean maskRequirement;
+    boolean maskMandate;
 
-    public Place(String name, int icon, int hours, boolean crowded, boolean maskRequirement)
+    public Place(String name, ArrayList<Boolean> days, int icon, int hours, boolean crowded, boolean maskMandate)
     {
         this.name = name;
+        this.days = days;
         this.icon = icon;
         this.hours = hours;
         this.crowded = crowded;
-        this.maskRequirement = maskRequirement;
+        this.maskMandate = maskMandate;
     }
 }

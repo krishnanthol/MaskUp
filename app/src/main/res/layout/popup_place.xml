@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="-45dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/id_cancel"
+                style="@style/DidactGothicTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="154dp"
+                android:layout_marginEnd="76dp"
+                android:background="@drawable/button_gradient_drawable"
+                android:text="Cancel"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_maskMandate" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/DidactGothicTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:text="Days"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_spinner" />
+
+            <EditText
+                android:id="@+id/id_hours"
+                style="@style/DidactGothicTextViewStyle"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="18dp"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Hours"
+                app:layout_constraintStart_toEndOf="@+id/id_sunday"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <CheckBox
+                android:id="@+id/id_crowded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="56dp"
+                android:text="Crowded"
+                app:layout_constraintStart_toEndOf="@+id/id_tuesday"
+                app:layout_constraintTop_toBottomOf="@+id/id_hours" />
+
+            <CheckBox
+                android:id="@+id/id_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monday"
+                app:layout_constraintEnd_toEndOf="@+id/id_sunday"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/id_sunday"
+                app:layout_constraintTop_toBottomOf="@+id/id_sunday" />
+
+            <CheckBox
+                android:id="@+id/id_thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thursday"
+                app:layout_constraintEnd_toEndOf="@+id/id_wednesday"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/id_wednesday"
+                app:layout_constraintTop_toBottomOf="@+id/id_wednesday" />
+
+            <CheckBox
+                android:id="@+id/id_maskMandate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mask Mandate"
+                app:layout_constraintEnd_toEndOf="@+id/id_crowded"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/id_crowded"
+                app:layout_constraintTop_toBottomOf="@+id/id_crowded" />
+
+            <EditText
+                android:id="@+id/id_placeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toEndOf="@+id/id_spinner"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                style="@style/DidactGothicTextViewStyle"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="104dp"
+                android:layout_marginTop="16dp"
+                android:text="Hours/Day"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/id_placeName" />
+
+            <Button
+                android:id="@+id/id_add"
+                style="@style/DidactGothicTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_gradient_drawable"
+                android:text="Add"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_saturday" />
+
+            <CheckBox
+                android:id="@+id/id_wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wednesday"
+                app:layout_constraintEnd_toEndOf="@+id/id_tuesday"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/id_tuesday"
+                app:layout_constraintTop_toBottomOf="@+id/id_tuesday" />
+
+            <CheckBox
+                android:id="@+id/id_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="Sunday"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <CheckBox
+                android:id="@+id/id_saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saturday"
+                app:layout_constraintEnd_toEndOf="@+id/id_friday"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/id_friday"
+                app:layout_constraintTop_toBottomOf="@+id/id_friday" />
+
+            <CheckBox
+                android:id="@+id/id_friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friday"
+                app:layout_constraintEnd_toEndOf="@+id/id_thursday"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/id_thursday"
+                app:layout_constraintTop_toBottomOf="@+id/id_thursday" />
+
+            <CheckBox
+                android:id="@+id/id_tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tuesday"
+                app:layout_constraintEnd_toEndOf="@+id/id_monday"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/id_monday"
+                app:layout_constraintTop_toBottomOf="@+id/id_monday" />
+
+            <Spinner
+                android:id="@+id/id_spinner"
+                android:layout_width="78dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="46dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

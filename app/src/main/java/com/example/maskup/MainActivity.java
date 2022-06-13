@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static List<String> places = new ArrayList<>();
 
     static Context context;
-    static CustomAdapter customAdapter;
 
     static NavigationView navigationView;
 
@@ -79,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         context = this;
 
         geocoder = new Geocoder(this, Locale.US);
-        //GetFrequentPlaces getFrequentPlaces = new GetFrequentPlaces();
-        //getFrequentPlaces.execute();
 
         getWeather = new GetWeather();
         getWeather.execute();
