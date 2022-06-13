@@ -16,6 +16,7 @@ public class GetFrequentPlaces extends AsyncTask<Void, Void, Void>
     @Override
     protected Void doInBackground(Void... voids)
     {
+        /*
         try
         {
             MainActivity.addresses = MainActivity.geocoder.getFromLocationName("57 Potomac Road",5);

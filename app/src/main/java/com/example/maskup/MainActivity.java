@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.MenuItem;
 import android.widget.ListView;
 
@@ -30,7 +31,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static double averageTemp;
 
     static GetLocation getLocation;
+
     static GetWeather getWeather;
+    static ArrayList<Weather> forecasts;
+    static boolean weatherComplete = false;
 
     static GetStats getStats;
     static boolean statsComplete = false;
@@ -44,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static Geocoder geocoder;
     static List<String> places = new ArrayList<>();
 
-    static ListView listView;
     static Context context;
     static CustomAdapter customAdapter;
 
@@ -86,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getWeather = new GetWeather();
         getWeather.execute();
 
+        forecasts = new ArrayList<Weather>();
+
+
         getLocation = new GetLocation();
         getLocation.execute();
 
@@ -106,14 +112,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_stats:
                 if(statsComplete)
                 {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("countyRiskLevel", countyRiskLevel);
-                    bundle.putIntegerArrayList("countyNewCases", countyNewCases);
-                    bundle.putIntegerArrayList("countyNewDeaths", countyNewDeaths);
-                    bundle.putIntegerArrayList("usNewCases", usNewCases);
-                    bundle.putIntegerArrayList("usNewDeaths", usNewDeaths);
+                    Bundle statsBundle = new Bundle();
+                    statsBundle.putInt("countyRiskLevel", countyRiskLevel);
+                    statsBundle.putIntegerArrayList("countyNewCases", countyNewCases);
+                    statsBundle.putIntegerArrayList("countyNewDeaths", countyNewDeaths);
+                    statsBundle.putIntegerArrayList("usNewCases", usNewCases);
+                    statsBundle.putIntegerArrayList("usNewDeaths", usNewDeaths);
                     StatsFragment statsFragment = new StatsFragment();
-                    statsFragment.setArguments(bundle);
+                    statsFragment.setArguments(statsBundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,statsFragment).commit();
                 }
                 else

@@ -7,13 +7,53 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/id_address"
-        android:layout_width="305dp"
-        android:layout_height="48dp"
+        android:id="@+id/id_time"
+        android:layout_width="69dp"
+        android:layout_height="23dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
+        android:text="Hour"
         android:textColor="#000000"
+        android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="83dp" />
+
+    <TextView
+        android:id="@+id/id_temp"
+        android:layout_width="60dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:text="Temp"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/id_time"
+        app:layout_constraintStart_toEndOf="@+id/id_time"
+        app:layout_constraintTop_toTopOf="@+id/id_time" />
+
+    <ImageView
+        android:id="@+id/id_imageView"
+        android:layout_width="49dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/id_temp"
+        app:layout_constraintStart_toEndOf="@+id/id_temp"
+        app:layout_constraintTop_toTopOf="@+id/id_temp"
+        app:layout_constraintVertical_bias="0.487"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/id_description"
+        android:layout_width="68dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="96dp"
+        android:gravity="center"
+        android:text="Desc"
+        android:textColor="#000000"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/id_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintStart_toEndOf="@+id/id_imageView"
+        app:layout_constraintTop_toTopOf="@+id/id_imageView"
+        app:layout_constraintVertical_bias="0.333" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+

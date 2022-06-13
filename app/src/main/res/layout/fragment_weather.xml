@@ -6,15 +6,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient_drawable">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="344dp"
-        android:text="Weather"
-        android:textSize="30dp"
+    <ListView
+        android:id="@+id/id_listView"
+        android:layout_width="294dp"
+        android:layout_height="233dp"
+        android:background="#e0e0e0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.594" />
 </androidx.constraintlayout.widget.ConstraintLayout>

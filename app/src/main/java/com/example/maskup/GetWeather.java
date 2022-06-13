@@ -1,6 +1,8 @@
 package com.example.maskup;
 
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -13,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 
 public class GetWeather extends AsyncTask<Void, Void, Void>
 {
@@ -61,14 +64,34 @@ public class GetWeather extends AsyncTask<Void, Void, Void>
             JSONObject weatherAll = new JSONObject(weatherString);
             JSONArray hourlyForecast = new JSONArray(weatherAll.getString("hourly"));
 
+            for (int i = 0; i < 5; i++)
+            {
+                SimpleDateFormat jdf=new SimpleDateFormat("hh:mm a");
+                java.util.Date time=new java.util.Date((long)Integer.parseInt(hourlyForecast.getJSONObject(i).getString("dt"))*1000);
+                String hour=jdf.format(time);
+
+                String temp=hourlyForecast.getJSONObject(i).getString("temp");
+
+                JSONArray weather=new JSONArray(hourlyForecast.getJSONObject(i).getString("weather"));
+
+                JSONObject idk=new JSONObject(weather.getString(0));
+                String image=idk.getString("icon");
+
+                String description=idk.getString("description");
+
+                Weather forecast=new Weather(hour,temp,image,description);
+
+                MainActivity.forecasts.add(forecast);
+            }
+
+            MainActivity.weatherComplete = true;
+
             for (int i = 0; i < 10; i++)
             {
                 temps+=Double.parseDouble(hourlyForecast.getJSONObject(i).getString("temp"));
             }
 
             MainActivity.averageTemp = temps/10;
-            Log.d("averageTemp",""+MainActivity.averageTemp);
-
         }
 
         catch(IOException e)
