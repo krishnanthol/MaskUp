@@ -51,7 +51,6 @@ public class GetLocation extends AsyncTask<Void, Void, Void>
                 {
                     if(MainActivity.county != null && MainActivity.state!= null)
                     {
-
                         MainActivity.getStats.execute();
                         MainActivity.getLocation.cancel(true);
                     }

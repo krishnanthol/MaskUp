@@ -1,8 +1,6 @@
 package com.example.maskup;
 
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -10,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,7 +26,6 @@ public class GetStats extends AsyncTask<Void, Void, Void>
     {
         try
         {
-
             for(int i = 0; i < statesAll.length; i++)
             {
                 if(MainActivity.state.equals(statesAll[i]))
@@ -38,9 +34,7 @@ public class GetStats extends AsyncTask<Void, Void, Void>
                 }
             }
 
-            Log.d("state",MainActivity.state);
-
-            URL url = new URL("https://api.covidactnow.org/v2/county/"+ MainActivity.state +".json?apiKey=eba19fd5e59748e08ed39bb96253239c");
+            URL url = new URL("https://api.covidactnow.org/v2/county/" + MainActivity.state + ".timeseries.json?apiKey=eba19fd5e59748e08ed39bb96253239c");
             URLConnection urlConnection = url.openConnection();
             InputStream inputStream = urlConnection.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
@@ -59,12 +53,67 @@ public class GetStats extends AsyncTask<Void, Void, Void>
                 {
                     statsObject = i;
                     i = statsAll.length();
-                    Log.d("statsObject",""+statsObject);
                 }
             }
 
-            MainActivity.covidCases = statsAll.getJSONObject(statsObject).getJSONObject("actuals").getString("newCases");
-            Log.d("stats",MainActivity.covidCases);
+            for(int i = statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").length()-2; i > statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").length()-7; i--)
+            {
+                if(statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").getJSONObject(i).getString("newCases").equals("null"))
+                {
+                    MainActivity.stateNewCases.add(0);
+                    //latest to oldest
+                }
+                else
+                {
+                    MainActivity.stateNewCases.add(Integer.parseInt(statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").getJSONObject(i).getString("newCases")));
+                }
+            }
+
+            for(int i = statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").length()-2; i > statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").length()-7; i--)
+            {
+                if(statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").getJSONObject(i).getString("newDeaths").equals("null"))
+                {
+                    MainActivity.stateNewDeaths.add(0);
+                    //latest to oldest
+                }
+                else
+                {
+                    MainActivity.stateNewDeaths.add(Integer.parseInt(statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").getJSONObject(i).getString("newDeaths")));
+                }
+            }
+
+            Log.d("stats",MainActivity.stateNewCases.toString());
+            Log.d("stats",MainActivity.stateNewDeaths.toString());
+
+            statsString = "";
+
+            URL url1 = new URL("https://api.covidactnow.org/v2/country/US.timeseries.json?apiKey=eba19fd5e59748e08ed39bb96253239c");
+            URLConnection urlConnection1 = url1.openConnection();
+            InputStream inputStream1 = urlConnection1.getInputStream();
+            BufferedReader br1 = new BufferedReader(new InputStreamReader(inputStream1));
+            String line1 = br1.readLine();
+
+            while (line1 != null)
+            {
+                statsString += line1;
+                line1 = br1.readLine();
+            }
+
+            JSONObject statsAll1 = new JSONObject(statsString);
+            for(int i = statsAll1.getJSONArray("actualsTimeseries").length()-1; i > statsAll1.getJSONArray("actualsTimeseries").length()-6; i--)
+            {
+                if(statsAll1.getJSONArray("actualsTimeseries").getJSONObject(i).getString("newCases").equals("null"))
+                {
+                    MainActivity.usNewCases.add(0);
+                }
+                else
+                {
+                    MainActivity.usNewCases.add(Integer.parseInt(statsAll1.getJSONArray("actualsTimeseries").getJSONObject(i).getString("newCases")));
+                }
+            }
+
+            Log.d("stats",MainActivity.usNewCases.toString());
+
         }
 
         catch(IOException e)

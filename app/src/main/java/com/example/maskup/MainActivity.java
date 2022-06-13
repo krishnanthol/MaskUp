@@ -24,16 +24,19 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-    static String zipCode = "08852";
+    static String zipCode = "08873";
     static String county;
     static String state;
-    static String covidCases;
 
     static double averageTemp;
 
     static GetLocation getLocation;
-    static GetStats getStats;
     static GetWeather getWeather;
+
+    static GetStats getStats;
+    static List<Integer> stateNewCases = new ArrayList<>();
+    static List<Integer> stateNewDeaths = new ArrayList<>();
+    static List<Integer> usNewCases = new ArrayList<>();
 
     static List<Address> addresses = new ArrayList<>();
     static Geocoder geocoder;
