@@ -78,6 +78,7 @@ public class GetWeather extends AsyncTask<Void, Void, Void>
                 String image=idk.getString("icon");
 
                 String description=idk.getString("description");
+                Log.d("description",description);
 
                 Weather forecast=new Weather(hour,temp,image,description);
 
