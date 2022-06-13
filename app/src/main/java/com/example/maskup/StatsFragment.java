@@ -1,9 +1,6 @@
 package com.example.maskup;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,72 +9,95 @@ import android.widget.ProgressBar;
 
 import androidx.fragment.app.Fragment;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class StatsFragment extends Fragment
 {
-    int stateRiskLevel;
-    ArrayList<Integer> stateNewCases = new ArrayList<>();
-    ArrayList<Integer> stateNewDeaths = new ArrayList<>();
+    int countyRiskLevel;
+    ArrayList<Integer> countyNewCases = new ArrayList<>();
+    ArrayList<Integer> countyNewDeaths = new ArrayList<>();
     ArrayList<Integer> usNewCases = new ArrayList<>();
     ArrayList<Integer> usNewDeaths = new ArrayList<>();
 
     ProgressBar progressBar;
-    LineChart stateNewCasesGraph;
+    GraphView countyNewCasesGraph;
+    GraphView countyNewDeathsGraph;
+    GraphView usNewCasesGraph;
+    GraphView usNewDeathsGraph;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_stats,container,false);
         progressBar = view.findViewById(R.id.id_riskLevelBar);
-        stateNewCasesGraph = view.findViewById(R.id.id_stateNewCasesGraph);
+        countyNewCasesGraph = view.findViewById(R.id.id_countyNewCasesGraph);
+        countyNewDeathsGraph = view.findViewById(R.id.id_countyNewDeathsGraph);
+        usNewCasesGraph = view.findViewById(R.id.id_usNewCasesGraph);
+        usNewDeathsGraph = view.findViewById(R.id.id_usNewDeathsGraph);
 
         if(getArguments() != null)
         {
-            stateRiskLevel = getArguments().getInt("stateRiskLevel");
-            stateNewCases = getArguments().getIntegerArrayList("stateNewCases");
-            stateNewDeaths = getArguments().getIntegerArrayList("stateNewDeaths");
+            countyRiskLevel = getArguments().getInt("countyRiskLevel");
+            countyNewCases = getArguments().getIntegerArrayList("countyNewCases");
+            countyNewDeaths = getArguments().getIntegerArrayList("countyNewDeaths");
             usNewCases = getArguments().getIntegerArrayList("usNewCases");
             usNewDeaths = getArguments().getIntegerArrayList("usNewDeaths");
 
-            progressBar.setProgress((int) (((double)stateRiskLevel/10)*100));
+            LineGraphSeries<DataPoint> countyNewCasesGraphData = new LineGraphSeries<DataPoint>((new DataPoint[]{
+                    new DataPoint(0, countyNewCases.get(4)),
+                    new DataPoint(1, countyNewCases.get(3)),
+                    new DataPoint(2, countyNewCases.get(2)),
+                    new DataPoint(3, countyNewCases.get(1)),
+                    new DataPoint(4, countyNewCases.get(0)),
+            }));
+            countyNewCasesGraph.setTitle("New County Cases");
+            countyNewCasesGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
+            countyNewCasesGraph.addSeries(countyNewCasesGraphData);
 
-            List<Entry> stateNewCasesData = new ArrayList<Entry>();
-            Entry e1 = new Entry(0,stateNewCases.get(4));
-            stateNewCasesData.add(e1);
-            Entry e2 = new Entry(0,stateNewCases.get(3));
-            stateNewCasesData.add(e2);
-            Entry e3 = new Entry(0,stateNewCases.get(2));
-            stateNewCasesData.add(e3);
-            Entry e4 = new Entry(0,stateNewCases.get(1));
-            stateNewCasesData.add(e4);
-            Entry e5 = new Entry(0,stateNewCases.get(0));
-            stateNewCasesData.add(e5);
+            LineGraphSeries<DataPoint> countyNewDeathsGraphData = new LineGraphSeries<DataPoint>((new DataPoint[]{
+                    new DataPoint(0, countyNewDeaths.get(4)),
+                    new DataPoint(1, countyNewDeaths.get(3)),
+                    new DataPoint(2, countyNewDeaths.get(2)),
+                    new DataPoint(3, countyNewDeaths.get(1)),
+                    new DataPoint(4, countyNewDeaths.get(0)),
+            }));
+            countyNewDeathsGraph.setTitle("New County Death Cases");
+            countyNewDeathsGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
+            countyNewDeathsGraph.addSeries(countyNewDeathsGraphData);
 
-            LineDataSet set1 = new LineDataSet(stateNewCasesData,"State New Cases");
-            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
 
-            List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-            dataSets.add(set1);
+            LineGraphSeries<DataPoint> usNewCasesGraphData = new LineGraphSeries<DataPoint>((new DataPoint[]{
+                    new DataPoint(0, usNewCases.get(4)),
+                    new DataPoint(1, usNewCases.get(3)),
+                    new DataPoint(2, usNewCases.get(2)),
+                    new DataPoint(3, usNewCases.get(1)),
+                    new DataPoint(4, usNewCases.get(0)),
+            }));
+            usNewCasesGraph.setTitle("New US Cases");
+            usNewCasesGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
+            usNewCasesGraph.addSeries(usNewCasesGraphData);
 
-            LineData data = new LineData(dataSets);
-            stateNewCasesGraph.setData(data);
-            stateNewCasesGraph.invalidate();
+            LineGraphSeries<DataPoint> usNewDeathsGraphData = new LineGraphSeries<DataPoint>((new DataPoint[]{
+                    new DataPoint(0, usNewDeaths.get(4)),
+                    new DataPoint(1, usNewDeaths.get(3)),
+                    new DataPoint(2, usNewDeaths.get(2)),
+                    new DataPoint(3, usNewDeaths.get(1)),
+                    new DataPoint(4, usNewCases.get(0)),
+            }));
+            usNewDeathsGraph.setTitle("New US Deaths");
+            usNewDeathsGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
+            usNewDeathsGraph.addSeries(usNewDeathsGraphData);
+
+            progressBar.setProgress((int) (((double) countyRiskLevel /10)*100));
 
         }
 
-        Log.d("stateRiskLevel",""+stateRiskLevel);
-        Log.d("stateNewCases",""+stateNewCases.toString());
+        Log.d("countyRiskLevel",""+ countyRiskLevel);
+        Log.d("stateNewCases",""+ countyNewCases.toString());
         return view;
     }
 

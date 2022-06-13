@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Risk Level"
+                android:text="County Risk Level"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.501"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,14 +40,47 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/id_stateNewCasesGraph"
-                android:layout_width="302dp"
-                android:layout_height="233dp"
-                android:layout_marginTop="108dp"
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/id_countyNewCasesGraph"
+                android:layout_width="317dp"
+                android:layout_height="208dp"
+                style="@style/DidactGothicTextViewStyle"
+                android:layout_marginTop="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.493"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/id_riskLevelBar" />
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/id_countyNewDeathsGraph"
+                style="@style/DidactGothicTextViewStyle"
+                android:layout_width="317dp"
+                android:layout_height="208dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_countyNewCasesGraph" />
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/id_usNewCasesGraph"
+                style="@style/DidactGothicTextViewStyle"
+                android:layout_width="317dp"
+                android:layout_height="208dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_countyNewDeathsGraph" />
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/id_usNewDeathsGraph"
+                style="@style/DidactGothicTextViewStyle"
+                android:layout_width="317dp"
+                android:layout_height="208dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_usNewCasesGraph" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

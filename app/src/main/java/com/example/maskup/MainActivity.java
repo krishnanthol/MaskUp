@@ -22,7 +22,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-    static String zipCode = "08873";
+    static String zipCode = "08852";
     static String county;
     static String state;
 
@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     static GetStats getStats;
     static boolean statsComplete = false;
-    static int stateRiskLevel;
-    static ArrayList<Integer> stateNewCases = new ArrayList<>();
-    static ArrayList<Integer> stateNewDeaths = new ArrayList<>();
+    static int countyRiskLevel;
+    static ArrayList<Integer> countyNewCases = new ArrayList<>();
+    static ArrayList<Integer> countyNewDeaths = new ArrayList<>();
     static ArrayList<Integer> usNewCases = new ArrayList<>();
     static ArrayList<Integer> usNewDeaths = new ArrayList<>();
 
@@ -107,11 +107,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(statsComplete)
                 {
                     Bundle bundle = new Bundle();
-                    bundle.putInt("stateRiskLevel", stateRiskLevel);
-                    bundle.putIntegerArrayList("stateNewCases", stateNewCases);
-                    bundle.putIntegerArrayList("stateNewDeaths", stateNewDeaths);
-                    bundle.putIntegerArrayList("stateNewCases", usNewCases);
-                    bundle.putIntegerArrayList("stateNewDeaths", usNewDeaths);
+                    bundle.putInt("countyRiskLevel", countyRiskLevel);
+                    bundle.putIntegerArrayList("countyNewCases", countyNewCases);
+                    bundle.putIntegerArrayList("countyNewDeaths", countyNewDeaths);
+                    bundle.putIntegerArrayList("usNewCases", usNewCases);
+                    bundle.putIntegerArrayList("usNewDeaths", usNewDeaths);
                     StatsFragment statsFragment = new StatsFragment();
                     statsFragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,statsFragment).commit();

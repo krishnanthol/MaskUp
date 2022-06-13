@@ -1,17 +1,7 @@
 package com.example.maskup;
 
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
-import android.view.MenuItem;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-
-import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +13,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
 public class GetStats extends AsyncTask<Void, Void, Void>
 {
@@ -71,12 +60,12 @@ public class GetStats extends AsyncTask<Void, Void, Void>
             {
                 if(statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").getJSONObject(i).getString("newCases").equals("null"))
                 {
-                    MainActivity.stateNewCases.add(0);
+                    MainActivity.countyNewCases.add(0);
                     //latest to oldest
                 }
                 else
                 {
-                    MainActivity.stateNewCases.add(Integer.parseInt(statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").getJSONObject(i).getString("newCases")));
+                    MainActivity.countyNewCases.add(Integer.parseInt(statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").getJSONObject(i).getString("newCases")));
                 }
             }
 
@@ -84,19 +73,19 @@ public class GetStats extends AsyncTask<Void, Void, Void>
             {
                 if(statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").getJSONObject(i).getString("newDeaths").equals("null"))
                 {
-                    MainActivity.stateNewDeaths.add(0);
+                    MainActivity.countyNewDeaths.add(0);
                     //latest to oldest
                 }
                 else
                 {
-                    MainActivity.stateNewDeaths.add(Integer.parseInt(statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").getJSONObject(i).getString("newDeaths")));
+                    MainActivity.countyNewDeaths.add(Integer.parseInt(statsAll.getJSONObject(statsObject).getJSONArray("actualsTimeseries").getJSONObject(i).getString("newDeaths")));
                 }
             }
 
-            MainActivity.stateRiskLevel = Integer.parseInt(statsAll.getJSONObject(statsObject).getJSONObject("riskLevels").getString("overall"));
-            Log.d("riskLevel",""+MainActivity.stateRiskLevel);
-            Log.d("stats",MainActivity.stateNewCases.toString());
-            Log.d("stats",MainActivity.stateNewDeaths.toString());
+            MainActivity.countyRiskLevel = Integer.parseInt(statsAll.getJSONObject(statsObject).getJSONObject("riskLevels").getString("overall"));
+            Log.d("riskLevel",""+MainActivity.countyRiskLevel);
+            Log.d("stats",MainActivity.countyNewCases.toString());
+            Log.d("stats",MainActivity.countyNewDeaths.toString());
 
             statsString = "";
 
@@ -141,31 +130,6 @@ public class GetStats extends AsyncTask<Void, Void, Void>
             Log.d("stats",MainActivity.usNewDeaths.toString());
 
             MainActivity.statsComplete = true;
-
-            /*
-            MainActivity.navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
-            {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item)
-                {
-                    if(item.getItemId() == R.id.nav_stats)
-                    {
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("stateRiskLevel", 12);
-                        bundle.putIntegerArrayList("stateNewCases", MainActivity.stateNewCases);
-                        bundle.putIntegerArrayList("stateNewDeaths", MainActivity.stateNewDeaths);
-                        bundle.putIntegerArrayList("stateNewCases", MainActivity.usNewCases);
-                        bundle.putIntegerArrayList("stateNewDeaths", MainActivity.usNewDeaths);
-                        StatsFragment statsFragment = new StatsFragment();
-                        statsFragment.setArguments(bundle);
-                        ((FragmentActivity) MainActivity.context).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
-                    }
-                    return false;
-                }
-            });
-
-             */
-
         }
 
         catch(IOException e)
