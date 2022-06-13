@@ -49,47 +49,55 @@ public class StatsFragment extends Fragment
             usNewDeaths = getArguments().getIntegerArrayList("usNewDeaths");
 
             LineGraphSeries<DataPoint> countyNewCasesGraphData = new LineGraphSeries<DataPoint>((new DataPoint[]{
-                    new DataPoint(0, countyNewCases.get(4)),
-                    new DataPoint(1, countyNewCases.get(3)),
-                    new DataPoint(2, countyNewCases.get(2)),
-                    new DataPoint(3, countyNewCases.get(1)),
-                    new DataPoint(4, countyNewCases.get(0)),
+                    new DataPoint(1, countyNewCases.get(4)),
+                    new DataPoint(2, countyNewCases.get(3)),
+                    new DataPoint(3, countyNewCases.get(2)),
+                    new DataPoint(4, countyNewCases.get(1)),
+                    new DataPoint(5, countyNewCases.get(0)),
             }));
             countyNewCasesGraph.setTitle("New County Cases");
+            countyNewCasesGraph.getGridLabelRenderer().setVerticalAxisTitle("Cases");
+            countyNewCasesGraph.getGridLabelRenderer().setHorizontalAxisTitle("Past 5 Days");
             countyNewCasesGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
             countyNewCasesGraph.addSeries(countyNewCasesGraphData);
 
             LineGraphSeries<DataPoint> countyNewDeathsGraphData = new LineGraphSeries<DataPoint>((new DataPoint[]{
-                    new DataPoint(0, countyNewDeaths.get(4)),
-                    new DataPoint(1, countyNewDeaths.get(3)),
-                    new DataPoint(2, countyNewDeaths.get(2)),
-                    new DataPoint(3, countyNewDeaths.get(1)),
-                    new DataPoint(4, countyNewDeaths.get(0)),
+                    new DataPoint(1, countyNewDeaths.get(4)),
+                    new DataPoint(2, countyNewDeaths.get(3)),
+                    new DataPoint(3, countyNewDeaths.get(2)),
+                    new DataPoint(4, countyNewDeaths.get(1)),
+                    new DataPoint(5, countyNewDeaths.get(0)),
             }));
             countyNewDeathsGraph.setTitle("New County Death Cases");
+            countyNewDeathsGraph.getGridLabelRenderer().setVerticalAxisTitle("Deaths");
+            countyNewDeathsGraph.getGridLabelRenderer().setHorizontalAxisTitle("Past 5 Days");
             countyNewDeathsGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
             countyNewDeathsGraph.addSeries(countyNewDeathsGraphData);
 
 
             LineGraphSeries<DataPoint> usNewCasesGraphData = new LineGraphSeries<DataPoint>((new DataPoint[]{
-                    new DataPoint(0, usNewCases.get(4)),
-                    new DataPoint(1, usNewCases.get(3)),
-                    new DataPoint(2, usNewCases.get(2)),
-                    new DataPoint(3, usNewCases.get(1)),
-                    new DataPoint(4, usNewCases.get(0)),
+                    new DataPoint(1, usNewCases.get(4)),
+                    new DataPoint(2, usNewCases.get(3)),
+                    new DataPoint(3, usNewCases.get(2)),
+                    new DataPoint(4, usNewCases.get(1)),
+                    new DataPoint(5, usNewCases.get(0)),
             }));
             usNewCasesGraph.setTitle("New US Cases");
+            usNewCasesGraph.getGridLabelRenderer().setVerticalAxisTitle("Cases");
+            usNewCasesGraph.getGridLabelRenderer().setHorizontalAxisTitle("Past 5 Days");
             usNewCasesGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
             usNewCasesGraph.addSeries(usNewCasesGraphData);
 
             LineGraphSeries<DataPoint> usNewDeathsGraphData = new LineGraphSeries<DataPoint>((new DataPoint[]{
-                    new DataPoint(0, usNewDeaths.get(4)),
-                    new DataPoint(1, usNewDeaths.get(3)),
-                    new DataPoint(2, usNewDeaths.get(2)),
-                    new DataPoint(3, usNewDeaths.get(1)),
-                    new DataPoint(4, usNewCases.get(0)),
+                    new DataPoint(1, usNewDeaths.get(4)),
+                    new DataPoint(2, usNewDeaths.get(3)),
+                    new DataPoint(3, usNewDeaths.get(2)),
+                    new DataPoint(4, usNewDeaths.get(1)),
+                    new DataPoint(5, usNewCases.get(0)),
             }));
             usNewDeathsGraph.setTitle("New US Deaths");
+            usNewDeathsGraph.getGridLabelRenderer().setVerticalAxisTitle("Deaths");
+            usNewDeathsGraph.getGridLabelRenderer().setHorizontalAxisTitle("Past 5 Days");
             usNewDeathsGraph.setBackgroundResource(R.drawable.button_gradient_drawable);
             usNewDeathsGraph.addSeries(usNewDeathsGraphData);
 

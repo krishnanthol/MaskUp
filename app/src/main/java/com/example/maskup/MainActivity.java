@@ -8,13 +8,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 
 import com.google.android.material.navigation.NavigationView;
@@ -79,8 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
         navigationView.setCheckedItem(R.id.nav_home);
 
-        //listView = findViewById(R.id.id_listView);
-
         context = this;
 
         geocoder = new Geocoder(this, Locale.US);
@@ -91,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getWeather.execute();
 
         forecasts = new ArrayList<Weather>();
-
 
         getLocation = new GetLocation();
         getLocation.execute();
