@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/maskuplogofull" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/id_startButton"
+        android:id="@+id/id_enter"
         android:layout_width="189dp"
         android:layout_height="72dp"
         android:background="@drawable/button_gradient_drawable"

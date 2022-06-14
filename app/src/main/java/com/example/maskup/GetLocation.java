@@ -16,6 +16,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+import io.paperdb.Paper;
+
 public class GetLocation extends AsyncTask<Void, Void, Void>
 {
     private String geocoderString = "";
@@ -43,6 +45,7 @@ public class GetLocation extends AsyncTask<Void, Void, Void>
             MainActivity.town = geocoderResults.getJSONObject(0).getString("name");
             MainActivity.state = geocoderResults.getJSONObject(0).getString("state");
 
+
             Log.d("county",MainActivity.county);
 
             new Handler(Looper.getMainLooper()).post(new Runnable()
@@ -52,6 +55,9 @@ public class GetLocation extends AsyncTask<Void, Void, Void>
                 {
                     if(MainActivity.county != null && MainActivity.state!= null)
                     {
+                        Paper.book().write("county", MainActivity.county);
+                        Paper.book().write("town",MainActivity.town);
+                        Paper.book().write("state", MainActivity.state);
                         MainActivity.getStats.execute();
                         MainActivity.getLocation.cancel(true);
                     }

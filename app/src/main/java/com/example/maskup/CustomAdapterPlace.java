@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import io.paperdb.Paper;
+
 public class CustomAdapterPlace extends ArrayAdapter<Place>
 {
     Context mainActivityContext;
@@ -43,6 +45,7 @@ public class CustomAdapterPlace extends ArrayAdapter<Place>
             public void onClick(View view)
             {
                 places.remove(position);
+                Paper.book().write("places", MainActivity.places);
                 notifyDataSetChanged();
             }
         });

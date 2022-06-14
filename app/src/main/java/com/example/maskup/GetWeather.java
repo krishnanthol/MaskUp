@@ -1,8 +1,6 @@
 package com.example.maskup;
 
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -84,8 +82,6 @@ public class GetWeather extends AsyncTask<Void, Void, Void>
 
                 MainActivity.forecasts.add(forecast);
             }
-
-            MainActivity.weatherComplete = true;
 
             for (int i = 0; i < 10; i++)
             {

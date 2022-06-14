@@ -11,6 +11,7 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
@@ -20,9 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import io.paperdb.Paper;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-    static String zipCode = "08852";
+    static String zipCode;
     static String town;
     static String county;
     static String state;
@@ -33,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     static GetWeather getWeather;
     static ArrayList<Weather> forecasts;
-    static boolean weatherComplete = false;
 
     static GetStats getStats;
     static boolean statsComplete = false;
@@ -43,7 +45,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static ArrayList<Integer> usNewCases = new ArrayList<>();
     static ArrayList<Integer> usNewDeaths = new ArrayList<>();
 
-    static ArrayList<Place> places = new ArrayList<>();
+    static boolean vaccinated;
+    static boolean immunocompromised;
+
+    static ArrayList<Place> places;
 
     static Context context;
 
@@ -56,6 +61,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Paper.init(this);
+        zipCode = Paper.book().read("zipCode", "");
+        town = Paper.book().read("town", "");
+        county = Paper.book().read("county", "");
+        state = Paper.book().read("state", "");
+        places = Paper.book().read("places", new ArrayList<>());
+        vaccinated = Paper.book().read("vaccinated",false);
+        immunocompromised = Paper.book().read("immuno",false);
 
         navigationView = findViewById(R.id.id_nav_view);
 
@@ -71,20 +85,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
-        navigationView.setCheckedItem(R.id.nav_home);
-
         context = this;
-
-        getWeather = new GetWeather();
-        getWeather.execute();
 
         forecasts = new ArrayList<Weather>();
 
-        getLocation = new GetLocation();
-        getLocation.execute();
-
         getStats = new GetStats();
+
+        if(zipCode.equals(""))
+        {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_profile);
+        }
+        else
+        {
+            getWeather = new GetWeather();
+            getWeather.execute();
+            getStats.execute();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable()
+            {
+                public void run()
+                {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+                    navigationView.setCheckedItem(R.id.nav_home);
+                }
+            }, 5000);
+        }
     }
 
     @Override

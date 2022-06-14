@@ -6,15 +6,50 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient_drawable">
 
-    <TextView
+    <EditText
+        android:id="@+id/id_enterZip"
+        style="@style/DidactGothicTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="344dp"
-        android:text="Profile"
-        android:textSize="30dp"
+        android:layout_marginTop="248dp"
+        android:ems="10"
+        android:hint="Zip Code"
+        android:inputType="number"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <CheckBox
+        android:id="@+id/id_checkVaccinated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vaccinated"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_enterZip" />
+
+    <CheckBox
+        android:id="@+id/id_checkCompro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Immunocompromised"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_checkVaccinated" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/id_enter"
+        android:layout_width="189dp"
+        android:layout_height="72dp"
+        android:background="@drawable/button_gradient_drawable"
+        android:text="Enter"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_checkCompro" />
 </androidx.constraintlayout.widget.ConstraintLayout>

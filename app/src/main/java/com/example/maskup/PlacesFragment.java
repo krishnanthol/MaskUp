@@ -26,6 +26,8 @@ import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import io.paperdb.Paper;
+
 public class PlacesFragment extends Fragment
 {
     MaterialButton addPlace;
@@ -156,6 +158,8 @@ public class PlacesFragment extends Fragment
                     Place place = new Place(name,hours,crowded,maskMandate);
                     MainActivity.places.add(place);
                     placeAdapter.notifyDataSetChanged();
+
+                    Paper.book().write("places", MainActivity.places);
 
                     dialog.dismiss();
                     name = "";

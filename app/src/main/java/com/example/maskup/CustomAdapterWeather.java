@@ -44,21 +44,13 @@ public class CustomAdapterWeather extends ArrayAdapter<Weather>
         time.setText(forecasts.get(position).getHour());
 
         temp.setText(forecasts.get(position).getTemp() + " F");
-        if (Double.parseDouble(forecasts.get(position).getTemp()) <= 32)
-        {
-            temp.setTextColor(Color.parseColor("#2137ff"));
-        }
-        else if (Double.parseDouble(forecasts.get(position).getTemp()) <= 52)
-        {
-            temp.setTextColor(Color.parseColor("#4255ff"));
-        }
-        else if (Double.parseDouble(forecasts.get(position).getTemp()) <= 90)
+        if (Double.parseDouble(forecasts.get(position).getTemp()) <= 70)
         {
             temp.setTextColor(Color.parseColor("#ff4545"));
         }
         else
         {
-            temp.setTextColor(Color.parseColor("#ff2929"));
+            temp.setTextColor(Color.GREEN);
         }
 
         Picasso.with(getContext()).load("https://openweathermap.org/img/wn/" + forecasts.get(position).getImage() + "@2x.png").into(imageView);
