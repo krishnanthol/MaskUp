@@ -10,11 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -22,12 +24,14 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PlacesFragment extends Fragment
 {
     MaterialButton addPlace;
     ListView placesListView;
     CustomAdapterPlace placeAdapter;
+    int selected;
 
     AlertDialog.Builder dialogBuilder;
     AlertDialog dialog;
@@ -45,8 +49,12 @@ public class PlacesFragment extends Fragment
     CheckBox checkCrowded;
     CheckBox checkMaskMandate;
 
+    TextView showDays;
+    TextView showHours;
+    TextView showMandate;
+    TextView showCrowded;
+
     String name;
-    ArrayList<Boolean> days = new ArrayList<>();
     int hours = 0;
     boolean crowded;
     boolean maskMandate;
@@ -62,13 +70,15 @@ public class PlacesFragment extends Fragment
         placeAdapter = new CustomAdapterPlace(MainActivity.context, R.layout.adapter_custom_place,MainActivity.places);
         placesListView.setAdapter(placeAdapter);
 
-        days.add(false);
-        days.add(false);
-        days.add(false);
-        days.add(false);
-        days.add(false);
-        days.add(false);
-        days.add(false);
+        placesListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                selected = i;
+                createNewPlaceDisplayDialog();
+            }
+        });
 
         addPlace.setOnClickListener(new View.OnClickListener()
         {
@@ -143,20 +153,12 @@ public class PlacesFragment extends Fragment
             {
                 if(!name.equals("") && hours != 0)
                 {
-                    Place place = new Place(name,days,hours,crowded,maskMandate);
+                    Place place = new Place(name,hours,crowded,maskMandate);
                     MainActivity.places.add(place);
                     placeAdapter.notifyDataSetChanged();
-                    Log.d("adapter",""+placeAdapter.getCount());
 
                     dialog.dismiss();
                     name = "";
-                    days.clear();
-                    days.add(false);
-                    days.add(false);
-                    days.add(false);
-                    days.add(false);
-                    days.add(false);
-                    days.add(false);
                     hours = 0;
                     crowded = false;
                     maskMandate = false;
@@ -176,26 +178,12 @@ public class PlacesFragment extends Fragment
             {
                 dialog.dismiss();
                 name = "";
-                days.clear();
-                days.add(false);
-                days.add(false);
-                days.add(false);
-                days.add(false);
-                days.add(false);
-                days.add(false);
                 hours = 0;
                 crowded = false;
                 maskMandate = false;
             }
         });
 
-        sunday = placePopupView.findViewById(R.id.id_sunday);
-        monday = placePopupView.findViewById(R.id.id_monday);
-        tuesday = placePopupView.findViewById(R.id.id_tuesday);
-        wednesday = placePopupView.findViewById(R.id.id_wednesday);
-        thursday = placePopupView.findViewById(R.id.id_thursday);
-        friday = placePopupView.findViewById(R.id.id_friday);
-        saturday = placePopupView.findViewById(R.id.id_saturday);
         checkCrowded = placePopupView.findViewById(R.id.id_crowded);
         checkMaskMandate = placePopupView.findViewById(R.id.id_maskMandate);
 
@@ -235,136 +223,29 @@ public class PlacesFragment extends Fragment
             }
         });
 
-        sunday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                if(b)
-                {
-                    days.set(0,true);
-                    Log.d("days",days.toString());
-                }
-                else
-                {
-                    days.set(0,false);
-                    Log.d("days",days.toString());
-                }
-            }
-        });
-
-        monday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                if(b)
-                {
-                    days.set(1,true);
-                    Log.d("days",days.toString());
-                }
-                else
-                {
-                    days.set(1,false);
-                    Log.d("days",days.toString());
-                }
-            }
-        });
-
-        tuesday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                if(b)
-                {
-                    days.set(2,true);
-                    Log.d("days",days.toString());
-                }
-                else
-                {
-                    days.set(2,false);
-                    Log.d("days",days.toString());
-                }
-            }
-        });
-
-        wednesday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                if(b)
-                {
-                    days.set(3,true);
-                    Log.d("days",days.toString());
-                }
-                else
-                {
-                    days.set(3,false);
-                    Log.d("days",days.toString());
-                }
-            }
-        });
-
-        thursday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                if(b)
-                {
-                    days.set(4,true);
-                    Log.d("days",days.toString());
-                }
-                else
-                {
-                    days.set(4,false);
-                    Log.d("days",days.toString());
-                }
-            }
-        });
-
-        friday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                if(b)
-                {
-                    days.set(5,true);
-                    Log.d("days",days.toString());
-                }
-                else
-                {
-                    days.set(5,false);
-                    Log.d("days",days.toString());
-                }
-            }
-        });
-
-        saturday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                if(b)
-                {
-                    days.set(6,true);
-                    Log.d("days",days.toString());
-                }
-                else
-                {
-                    days.set(6,false);
-                    Log.d("days",days.toString());
-                }
-            }
-        });
-
         dialogBuilder.setView(placePopupView);
         dialog = dialogBuilder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
+        dialog.show();
+    }
+
+    public void createNewPlaceDisplayDialog()
+    {
+        dialogBuilder = new AlertDialog.Builder(MainActivity.context);
+        final View placeDisplayPopupView = getLayoutInflater().inflate(R.layout.popup_place_display,null);
+
+        showHours = placeDisplayPopupView.findViewById(R.id.id_showHours);
+        showHours.setText("Hours/Day: "+MainActivity.places.get(selected).getHours());
+
+        showCrowded = placeDisplayPopupView.findViewById(R.id.id_showCrowded);
+        showCrowded.setText("Crowded: "+MainActivity.places.get(selected).isCrowded());
+
+        showMandate = placeDisplayPopupView.findViewById(R.id.id_showMandate);
+        showMandate.setText("MaskMandate: "+MainActivity.places.get(selected).isMaskMandate());
+
+        dialogBuilder.setView(placeDisplayPopupView);
+        dialog = dialogBuilder.create();
         dialog.show();
     }
 }

@@ -22,67 +22,37 @@
                 style="@style/DidactGothicTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="152dp"
+                android:layout_marginTop="76dp"
                 android:layout_marginEnd="76dp"
                 android:background="@drawable/button_gradient_drawable"
                 android:text="Cancel"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/id_maskMandate" />
-
-            <TextView
-                android:id="@+id/textView2"
-                style="@style/DidactGothicTextViewStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Days"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/id_placeName" />
+                app:layout_constraintTop_toBottomOf="@+id/id_hours" />
 
             <EditText
                 android:id="@+id/id_hours"
                 style="@style/DidactGothicTextViewStyle"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="4dp"
                 android:ems="10"
+                android:hint="Hours/Day"
                 android:inputType="number"
-                android:hint="Hours"
-                app:layout_constraintStart_toEndOf="@+id/id_sunday"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.534"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_placeName" />
 
             <CheckBox
                 android:id="@+id/id_crowded"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="52dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
                 android:text="Crowded"
-                app:layout_constraintStart_toEndOf="@+id/id_tuesday"
-                app:layout_constraintTop_toBottomOf="@+id/id_hours" />
-
-            <CheckBox
-                android:id="@+id/id_monday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monday"
-                app:layout_constraintEnd_toEndOf="@+id/id_sunday"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/id_sunday"
-                app:layout_constraintTop_toBottomOf="@+id/id_sunday" />
-
-            <CheckBox
-                android:id="@+id/id_thursday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Thursday"
-                app:layout_constraintEnd_toEndOf="@+id/id_wednesday"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/id_wednesday"
-                app:layout_constraintTop_toBottomOf="@+id/id_wednesday" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_placeName" />
 
             <CheckBox
                 android:id="@+id/id_maskMandate"
@@ -106,79 +76,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                style="@style/DidactGothicTextViewStyle"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="104dp"
-                android:layout_marginTop="16dp"
-                android:text="Hours/Day"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/id_placeName" />
-
             <Button
                 android:id="@+id/id_add"
                 style="@style/DidactGothicTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/button_gradient_drawable"
                 android:text="Add"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/id_saturday" />
-
-            <CheckBox
-                android:id="@+id/id_wednesday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Wednesday"
-                app:layout_constraintEnd_toEndOf="@+id/id_tuesday"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/id_tuesday"
-                app:layout_constraintTop_toBottomOf="@+id/id_tuesday" />
-
-            <CheckBox
-                android:id="@+id/id_sunday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:text="Sunday"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-            <CheckBox
-                android:id="@+id/id_saturday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Saturday"
-                app:layout_constraintEnd_toEndOf="@+id/id_friday"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/id_friday"
-                app:layout_constraintTop_toBottomOf="@+id/id_friday" />
-
-            <CheckBox
-                android:id="@+id/id_friday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Friday"
-                app:layout_constraintEnd_toEndOf="@+id/id_thursday"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/id_thursday"
-                app:layout_constraintTop_toBottomOf="@+id/id_thursday" />
-
-            <CheckBox
-                android:id="@+id/id_tuesday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tuesday"
-                app:layout_constraintEnd_toEndOf="@+id/id_monday"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/id_monday"
-                app:layout_constraintTop_toBottomOf="@+id/id_monday" />
+                app:layout_constraintTop_toBottomOf="@+id/id_maskMandate" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
