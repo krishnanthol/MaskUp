@@ -3,7 +3,7 @@ package com.example.maskup;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.location.Address;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +17,13 @@ import androidx.annotation.Nullable;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class CustomAdapter extends ArrayAdapter<Weather>
+public class CustomAdapterWeather extends ArrayAdapter<Weather>
 {
     Context mainActivityContext;
     ArrayList<Weather> forecasts;
 
-    public CustomAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Weather> forecasts)
+    public CustomAdapterWeather(@NonNull Context context, int resource, @NonNull ArrayList<Weather> forecasts)
     {
         super(context,resource,forecasts);
         mainActivityContext = context;
@@ -35,7 +34,7 @@ public class CustomAdapter extends ArrayAdapter<Weather>
     {
         LayoutInflater layoutInflater = (LayoutInflater) mainActivityContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
-        View v = layoutInflater.inflate(R.layout.adapter_custom, null);
+        View v = layoutInflater.inflate(R.layout.adapter_custom_weather, null);
 
         TextView time = v.findViewById(R.id.id_time);
         TextView temp = v.findViewById(R.id.id_temp);

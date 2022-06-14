@@ -17,7 +17,7 @@ public class WeatherFragment extends Fragment
     TextView showTown;
     ImageView currentIcon;
     ListView weatherListView;
-    CustomAdapter weatherAdapter;
+    CustomAdapterWeather weatherAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -28,7 +28,7 @@ public class WeatherFragment extends Fragment
         currentTemp = view.findViewById(R.id.id_currentTemp);
         showTown = view.findViewById(R.id.id_showTown);
         currentIcon = view.findViewById(R.id.id_currentIcon);
-        weatherAdapter = new CustomAdapter(MainActivity.context, R.layout.adapter_custom,MainActivity.forecasts);
+        weatherAdapter = new CustomAdapterWeather(MainActivity.context, R.layout.adapter_custom_weather,MainActivity.forecasts);
         weatherListView.setAdapter(weatherAdapter);
 
         currentTemp.setText(MainActivity.forecasts.get(0).getTemp()+"°");

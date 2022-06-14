@@ -12,6 +12,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
 
 import com.google.android.material.navigation.NavigationView;
@@ -42,9 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static ArrayList<Integer> usNewCases = new ArrayList<>();
     static ArrayList<Integer> usNewDeaths = new ArrayList<>();
 
-    static List<Address> addresses = new ArrayList<>();
-    static Geocoder geocoder;
-    static List<String> places = new ArrayList<>();
+    static ArrayList<Place> places = new ArrayList<>();
 
     static Context context;
 
@@ -76,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setCheckedItem(R.id.nav_home);
 
         context = this;
-
-        geocoder = new Geocoder(this, Locale.US);
 
         getWeather = new GetWeather();
         getWeather.execute();
