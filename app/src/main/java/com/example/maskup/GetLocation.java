@@ -58,7 +58,6 @@ public class GetLocation extends AsyncTask<Void, Void, Void>
                         Paper.book().write("county", MainActivity.county);
                         Paper.book().write("town",MainActivity.town);
                         Paper.book().write("state", MainActivity.state);
-                        MainActivity.getStats.execute();
                         MainActivity.getLocation.cancel(true);
                     }
                 }

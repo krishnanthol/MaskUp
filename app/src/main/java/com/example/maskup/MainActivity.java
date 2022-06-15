@@ -6,20 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
+import android.app.Dialog;
 import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-
-
+import android.view.Window;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import io.paperdb.Paper;
 
@@ -36,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     static GetWeather getWeather;
     static ArrayList<Weather> forecasts;
+    static boolean weatherComplete = false;
 
     static GetStats getStats;
     static boolean statsComplete = false;
@@ -87,7 +83,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         context = this;
 
+        getWeather = new GetWeather();
+        getWeather.execute();
+
         forecasts = new ArrayList<Weather>();
+
+        getLocation = new GetLocation();
+        getLocation.execute();
 
         getStats = new GetStats();
 
@@ -102,15 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getWeather.execute();
             getStats.execute();
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable()
-            {
-                public void run()
-                {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
-                    navigationView.setCheckedItem(R.id.nav_home);
-                }
-            }, 5000);
+            showSplash();
         }
     }
 
@@ -166,6 +160,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else
         {
             super.onBackPressed();
+        }
+    }
+
+    public void showSplash()
+    {
+
+        Dialog dialog = new Dialog(MainActivity.context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_splash_screen);
+        dialog.setCancelable(true);
+        dialog.show();
+
+        final Handler handler  = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                {
+                    dialog.dismiss();
+                }
+            }
+        };
+        if(MainActivity.zipCode.equals(""))
+            handler.postDelayed(runnable, 7000);
+
+        else if(!statsComplete)
+        {
+            final Handler handler2 = new Handler(Looper.getMainLooper());
+            handler2.postDelayed(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+                    navigationView.setCheckedItem(R.id.nav_home);
+                    dialog.dismiss();
+                }
+            }, 7000);
+        }
+    }
+
+    static public void showSplashAlt()
+    {
+
+        Dialog dialog = new Dialog(MainActivity.context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_splash_screen);
+        dialog.setCancelable(true);
+        dialog.show();
+
+        final Handler handler  = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                {
+                    dialog.dismiss();
+                }
+            }
+        };
+
+        if(!statsComplete)
+        {
+            handler.postDelayed(runnable, 7000);
         }
     }
 }

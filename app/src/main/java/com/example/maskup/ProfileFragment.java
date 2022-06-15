@@ -1,6 +1,8 @@
 package com.example.maskup;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import io.paperdb.Paper;
 
@@ -40,27 +44,31 @@ public class ProfileFragment extends Fragment
         if(!MainActivity.zipCode.equals(""))
         {
             enterZip.setText(""+MainActivity.zipCode);
+            enterZip.setFocusable(false);
         }
-        enterZip.addTextChangedListener(new TextWatcher()
+        else
         {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            enterZip.addTextChangedListener(new TextWatcher()
             {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+                {
 
-            }
+                }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
-            {
-                temp = charSequence.toString();
-            }
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+                {
+                    temp = charSequence.toString();
+                }
 
-            @Override
-            public void afterTextChanged(Editable editable)
-            {
+                @Override
+                public void afterTextChanged(Editable editable)
+                {
 
-            }
-        });
+                }
+            });
+        }
 
         checkVaccinated.setChecked(MainActivity.vaccinated);
         checkVaccinated.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
@@ -87,7 +95,7 @@ public class ProfileFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-                if(!MainActivity.zipCode.equals(temp))
+                if(MainActivity.zipCode.equals(""))
                 {
                     MainActivity.zipCode = temp;
                     Paper.book().write("zipCode", MainActivity.zipCode);
@@ -98,13 +106,43 @@ public class ProfileFragment extends Fragment
                     MainActivity.getLocation = new GetLocation();
                     MainActivity.getLocation.execute();
 
+                    MainActivity.getStats = new GetStats();
+                    MainActivity.getStats.execute();
+
+                    MainActivity.vaccinated = v;
+                    Paper.book().write("vaccinated", MainActivity.vaccinated);
+                    MainActivity.immunocompromised = i;
+                    Paper.book().write("immuno", MainActivity.immunocompromised);
+
+                    MainActivity.showSplashAlt();
+
+                    final Handler handler2 = new Handler(Looper.getMainLooper());
+                    handler2.postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container,new HomeFragment());
+                            MainActivity.navigationView.setCheckedItem(R.id.nav_home);
+                            fragmentTransaction.commit();
+                        }
+                    }, 7000);
+                }
+                else
+                {
+                    MainActivity.vaccinated = v;
+                    Paper.book().write("vaccinated", MainActivity.vaccinated);
+                    MainActivity.immunocompromised = i;
+                    Paper.book().write("immuno", MainActivity.immunocompromised);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container,new HomeFragment());
+                    MainActivity.navigationView.setCheckedItem(R.id.nav_home);
+                    fragmentTransaction.commit();
 
                 }
-
-                MainActivity.vaccinated = v;
-                Paper.book().write("vaccinated", MainActivity.vaccinated);
-                MainActivity.immunocompromised = i;
-                Paper.book().write("immuno", MainActivity.immunocompromised);
             }
         });
 

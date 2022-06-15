@@ -34,33 +34,44 @@ public class HomeFragment extends Fragment
             temperatureTest = true;
         }
 
-        if ((MainActivity.countyNewCases.get(4) - MainActivity.countyNewCases.get(4)) > 0) {
-            statsTest = false;
-        } else {
+        if ((MainActivity.countyNewCases.get(0) - MainActivity.countyNewCases.get(1)) > 0)
+        {
+            if((((MainActivity.countyNewCases.get(0) - MainActivity.countyNewCases.get(1))/MainActivity.countyNewCases.get(3))*100) > 50)
+            {
+                Log.d("countyNewCases",MainActivity.countyNewCases.toString());
+                statsTest = false;
+            }
+        }
+        else
+        {
             statsTest = true;
         }
 
-        for (int i = 0; i < MainActivity.places.size(); i++)
+        Log.d("places",MainActivity.places.toString());
+
+        if(MainActivity.places.size() > 0)
         {
-            if (MainActivity.places.get(i).getHours() > 3)
+            for (int i = 0; i < MainActivity.places.size(); i++)
             {
-                placesTest = false;
-                i = MainActivity.places.size();
+                if (MainActivity.places.get(i).getHours() > 3)
+                {
+
+                    if(MainActivity.places.get(i).isCrowded())
+                    {
+                        placesTest = false;
+                        i = MainActivity.places.size();
+                    }
+                    else if(MainActivity.places.get(i).isMaskMandate())
+                    {
+                        placesTest = false;
+                        i = MainActivity.places.size();
+                    }
+                }
             }
-            else if(MainActivity.places.get(i).isCrowded())
-            {
-                placesTest = false;
-                i = MainActivity.places.size();
-            }
-            else if(MainActivity.places.get(i).isMaskMandate())
-            {
-                placesTest = false;
-                i = MainActivity.places.size();
-            }
-            else
-            {
-                placesTest = true;
-            }
+        }
+        else
+        {
+            placesTest = true;
         }
 
         if (!temperatureTest)
