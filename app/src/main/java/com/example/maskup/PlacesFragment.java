@@ -2,8 +2,6 @@ package com.example.maskup;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,9 +20,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import io.paperdb.Paper;
 
