@@ -89,9 +89,9 @@ public class HomeFragment extends Fragment
             fails++;
             Log.d("fail3","");
         }
-        if(MainActivity.vaccinated)
+        if(!MainActivity.vaccinated)
         {
-            fails--;
+            fails++;
             Log.d("fail4","");
         }
         if(MainActivity.immunocompromised)
