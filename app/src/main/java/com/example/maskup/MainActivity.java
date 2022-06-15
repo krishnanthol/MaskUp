@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     static boolean vaccinated;
     static boolean immunocompromised;
+    static boolean firstLaunch;
 
     static ArrayList<Place> places;
 
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         places = Paper.book().read("places", new ArrayList<>());
         vaccinated = Paper.book().read("vaccinated",false);
         immunocompromised = Paper.book().read("immuno",false);
+        firstLaunch = Paper.book().read("firstLaunch",false);
 
         navigationView = findViewById(R.id.id_nav_view);
 
@@ -110,41 +112,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
-        switch(item.getItemId())
+        if(!MainActivity.zipCode.equals("") || MainActivity.firstLaunch)
         {
-            case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
-                break;
-            case R.id.nav_profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
-                break;
-            case R.id.nav_stats:
-                if(statsComplete)
-                {
-                    Bundle statsBundle = new Bundle();
-                    statsBundle.putInt("countyRiskLevel", countyRiskLevel);
-                    statsBundle.putIntegerArrayList("countyNewCases", countyNewCases);
-                    statsBundle.putIntegerArrayList("countyNewDeaths", countyNewDeaths);
-                    statsBundle.putIntegerArrayList("usNewCases", usNewCases);
-                    statsBundle.putIntegerArrayList("usNewDeaths", usNewDeaths);
-                    StatsFragment statsFragment = new StatsFragment();
-                    statsFragment.setArguments(statsBundle);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,statsFragment).commit();
-                }
-                else
-                {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StatsFragment()).commit();
-                }
-                break;
-            case R.id.nav_weather:
-                if(!county.equals(""))
-                {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new WeatherFragment()).commit();
-                }
-                break;
-            case R.id.nav_places:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new PlacesFragment()).commit();
-                break;
+            switch(item.getItemId())
+            {
+                case R.id.nav_home:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+                    break;
+                case R.id.nav_profile:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
+                    break;
+                case R.id.nav_stats:
+                    if(statsComplete)
+                    {
+                        Bundle statsBundle = new Bundle();
+                        statsBundle.putInt("countyRiskLevel", countyRiskLevel);
+                        statsBundle.putIntegerArrayList("countyNewCases", countyNewCases);
+                        statsBundle.putIntegerArrayList("countyNewDeaths", countyNewDeaths);
+                        statsBundle.putIntegerArrayList("usNewCases", usNewCases);
+                        statsBundle.putIntegerArrayList("usNewDeaths", usNewDeaths);
+                        StatsFragment statsFragment = new StatsFragment();
+                        statsFragment.setArguments(statsBundle);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,statsFragment).commit();
+                    }
+                    else
+                    {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StatsFragment()).commit();
+                    }
+                    break;
+                case R.id.nav_weather:
+                    if(!county.equals(""))
+                    {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new WeatherFragment()).commit();
+                    }
+                    break;
+                case R.id.nav_places:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new PlacesFragment()).commit();
+                    break;
+            }
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -164,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void showSplash()
     {
-
         Dialog dialog = new Dialog(MainActivity.context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.activity_splash_screen);

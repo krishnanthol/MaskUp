@@ -90,6 +90,9 @@ public class PlacesFragment extends Fragment
             @Override
             public void onClick(View view)
             {
+                MainActivity.firstLaunch = true;
+                Paper.book().write("firstLaunch",MainActivity.firstLaunch);
+
                 if(!MainActivity.statsComplete)
                 {
                     MainActivity.showSplashAlt();
