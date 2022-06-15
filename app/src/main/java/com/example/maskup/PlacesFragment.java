@@ -2,6 +2,8 @@ package com.example.maskup;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -30,23 +34,17 @@ public class PlacesFragment extends Fragment
     CustomAdapterPlace placeAdapter;
     int selected;
 
+    Button goHome;
+
     AlertDialog.Builder dialogBuilder;
     AlertDialog dialog;
     EditText enterPlaceName;
     EditText enterHours;
     Button addInfo;
     Button cancel;
-    CheckBox sunday;
-    CheckBox monday;
-    CheckBox tuesday;
-    CheckBox wednesday;
-    CheckBox thursday;
-    CheckBox friday;
-    CheckBox saturday;
+
     CheckBox checkCrowded;
     CheckBox checkMaskMandate;
-
-    TextView showDays;
     TextView showHours;
     TextView showMandate;
     TextView showCrowded;
@@ -63,6 +61,7 @@ public class PlacesFragment extends Fragment
 
         placesListView = view.findViewById(R.id.id_placesListView);
         addPlace = view.findViewById(R.id.id_addPlaceButton);
+        goHome = view.findViewById(R.id.id_goHome);
 
         placeAdapter = new CustomAdapterPlace(MainActivity.context, R.layout.adapter_custom_place,MainActivity.places);
         placesListView.setAdapter(placeAdapter);
@@ -85,6 +84,42 @@ public class PlacesFragment extends Fragment
                 createNewPlaceDialog();
             }
         });
+
+        goHome.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(!MainActivity.statsComplete)
+                {
+                    MainActivity.showSplashAlt();
+                    MainActivity.getStats = new GetStats();
+                    MainActivity.getStats.execute();
+
+                    final Handler handler2 = new Handler(Looper.getMainLooper());
+                    handler2.postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container,new HomeFragment());
+                            MainActivity.navigationView.setCheckedItem(R.id.nav_home);
+                            fragmentTransaction.commit();
+                        }
+                    }, 7000);
+                }
+                else
+                {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container,new HomeFragment());
+                    MainActivity.navigationView.setCheckedItem(R.id.nav_home);
+                    fragmentTransaction.commit();
+                }
+                }
+            });
         return view;
     }
 

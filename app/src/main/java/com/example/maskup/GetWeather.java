@@ -62,7 +62,7 @@ public class GetWeather extends AsyncTask<Void, Void, Void>
             JSONObject weatherAll = new JSONObject(weatherString);
             JSONArray hourlyForecast = new JSONArray(weatherAll.getString("hourly"));
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 12; i++)
             {
                 SimpleDateFormat jdf=new SimpleDateFormat("hh:mm a");
                 java.util.Date time=new java.util.Date((long)Integer.parseInt(hourlyForecast.getJSONObject(i).getString("dt"))*1000);
@@ -83,7 +83,7 @@ public class GetWeather extends AsyncTask<Void, Void, Void>
                 MainActivity.forecasts.add(forecast);
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 12; i++)
             {
                 temps+=Double.parseDouble(hourlyForecast.getJSONObject(i).getString("temp"));
             }

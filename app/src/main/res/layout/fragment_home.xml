@@ -98,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/id_weatherDesc" />
 
     <Button
-        android:id="@+id/id_showStatus"
+        android:id="@+id/id_goHome"
         style="@style/DidactGothicTextViewStyle"
         android:layout_width="189dp"
         android:clickable="false"

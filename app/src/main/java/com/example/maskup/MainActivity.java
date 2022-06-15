@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     static GetWeather getWeather;
     static ArrayList<Weather> forecasts;
-    static boolean weatherComplete = false;
 
     static GetStats getStats;
     static boolean statsComplete = false;
@@ -210,9 +209,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dialog.show();
 
         final Handler handler  = new Handler();
-        final Runnable runnable = new Runnable() {
+        final Runnable runnable = new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
                 {
                     dialog.dismiss();
                 }
@@ -222,6 +223,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(!statsComplete)
         {
             handler.postDelayed(runnable, 7000);
+        }
+        else
+        {
+            handler.postDelayed(runnable,3000);
         }
     }
 }

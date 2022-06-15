@@ -39,7 +39,7 @@ public class ProfileFragment extends Fragment
         checkVaccinated = view.findViewById(R.id.id_checkVaccinated);
         checkImmuno = view.findViewById(R.id.id_checkCompro);
 
-        enter = view.findViewById(R.id.id_showStatus);
+        enter = view.findViewById(R.id.id_goHome);
 
         if(!MainActivity.zipCode.equals(""))
         {
@@ -106,42 +106,29 @@ public class ProfileFragment extends Fragment
                     MainActivity.getLocation = new GetLocation();
                     MainActivity.getLocation.execute();
 
-                    MainActivity.getStats = new GetStats();
-                    MainActivity.getStats.execute();
-
                     MainActivity.vaccinated = v;
                     Paper.book().write("vaccinated", MainActivity.vaccinated);
                     MainActivity.immunocompromised = i;
                     Paper.book().write("immuno", MainActivity.immunocompromised);
 
-                    MainActivity.showSplashAlt();
-
-                    final Handler handler2 = new Handler(Looper.getMainLooper());
-                    handler2.postDelayed(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            FragmentManager fragmentManager = getFragmentManager();
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.fragment_container,new HomeFragment());
-                            MainActivity.navigationView.setCheckedItem(R.id.nav_home);
-                            fragmentTransaction.commit();
-                        }
-                    }, 7000);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container,new PlacesFragment());
+                    MainActivity.navigationView.setCheckedItem(R.id.nav_places);
+                    fragmentTransaction.commit();
                 }
-                else
+                else if(!MainActivity.zipCode.equals(""))
                 {
                     MainActivity.vaccinated = v;
                     Paper.book().write("vaccinated", MainActivity.vaccinated);
                     MainActivity.immunocompromised = i;
                     Paper.book().write("immuno", MainActivity.immunocompromised);
+
                     FragmentManager fragmentManager = getFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container,new HomeFragment());
                     MainActivity.navigationView.setCheckedItem(R.id.nav_home);
                     fragmentTransaction.commit();
-
                 }
             }
         });

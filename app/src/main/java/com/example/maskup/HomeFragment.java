@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -26,6 +25,9 @@ public class HomeFragment extends Fragment
     boolean placesTest;
 
     int fails;
+    int totalHours;
+    int totalMandate;
+    int totalCrowded;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class HomeFragment extends Fragment
         statsDesc = view.findViewById(R.id.id_statsDesc);
         weatherDesc = view.findViewById(R.id.id_weatherDesc);
         placesDesc = view.findViewById(R.id.id_placesDesc);
-        show = view.findViewById(R.id.id_showStatus);
+        show = view.findViewById(R.id.id_goHome);
 
 
         if (MainActivity.averageTemp <= 70)
@@ -48,7 +50,7 @@ public class HomeFragment extends Fragment
 
         if ((MainActivity.countyNewCases.get(0) - MainActivity.countyNewCases.get(1)) > 0)
         {
-            if((((MainActivity.countyNewCases.get(0) - MainActivity.countyNewCases.get(1))/MainActivity.countyNewCases.get(3))*100) > 50)
+            if((((MainActivity.countyNewCases.get(0) - MainActivity.countyNewCases.get(1))/MainActivity.countyNewCases.get(1))*100) > 30)
             {
                 Log.d("countyNewCases",MainActivity.countyNewCases.toString());
                 statsTest = false;
@@ -65,14 +67,19 @@ public class HomeFragment extends Fragment
         {
             for (int i = 0; i < MainActivity.places.size(); i++)
             {
-                if (MainActivity.places.get(i).getHours() > 3)
+                if(MainActivity.places.get(i).isCrowded())
                 {
-                    if(MainActivity.places.get(i).isCrowded())
-                    {
-                        placesTest = false;
-                        i = MainActivity.places.size();
-                    }
-                    else if(MainActivity.places.get(i).isMaskMandate())
+                    totalCrowded++;
+                }
+                if(MainActivity.places.get(i).isMaskMandate())
+                {
+                    totalMandate++;
+                }
+                totalHours+=MainActivity.places.get(i).getHours();
+
+                if(totalHours >= 6)
+                {
+                    if(totalCrowded >= MainActivity.places.size()/2 || totalMandate >= MainActivity.places.size()/2)
                     {
                         placesTest = false;
                         i = MainActivity.places.size();
@@ -143,14 +150,15 @@ public class HomeFragment extends Fragment
             profileDesc.setTextColor(Color.parseColor("#fab4b4"));
             Log.d("fail4","");
         }
-        else if(MainActivity.immunocompromised)
+        Log.d("immuno",""+MainActivity.immunocompromised);
+        if(MainActivity.immunocompromised)
         {
             fails++;
             profileDesc.setText("Fail");
             profileDesc.setTextColor(Color.parseColor("#fab4b4"));
             Log.d("fail5","");
         }
-        else
+        if(!MainActivity.immunocompromised && MainActivity.vaccinated)
         {
             profileDesc.setText("Pass");
             profileDesc.setTextColor(Color.parseColor("#7da67b"));
