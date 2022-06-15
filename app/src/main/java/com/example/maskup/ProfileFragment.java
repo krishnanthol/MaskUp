@@ -39,7 +39,7 @@ public class ProfileFragment extends Fragment
         checkVaccinated = view.findViewById(R.id.id_checkVaccinated);
         checkImmuno = view.findViewById(R.id.id_checkCompro);
 
-        enter = view.findViewById(R.id.id_enter);
+        enter = view.findViewById(R.id.id_showStatus);
 
         if(!MainActivity.zipCode.equals(""))
         {
